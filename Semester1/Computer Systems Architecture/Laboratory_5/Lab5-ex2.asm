@@ -37,12 +37,12 @@ segment code use32 class=code
         MOV ESI, s2          ; position ESI on the first element of s2
         MOV EDI, d           ; position EDI on d
         CLD                  ; DF = 0
-        jecxz sir_s1         ; jump on the next step if the length is 0
-        repeta:
+        jecxz do_s1         ; jump on the next step if the length is 0
+        repeat_loop:
             MOVSB            ; [EDI] = [ESI] = [s2], ESI++
             INC ESI          ; ESI++
-            loop repeta
-        sir_s1:
+            loop repeat_loop
+        do_s1:
             MOV AL, 01h
             TEST AL, l2 
             jz et3
@@ -53,10 +53,10 @@ segment code use32 class=code
             et4:
             MOV ESI, s1+1 
             jecxz final      ; jump on the next step if the length is 0
-            repeta2:
+            repeat_loop2:
                 MOVSB        ; [EDI] = [ESI] = [s1+1], ESI++
                 INC ESI      ; ESI++
-                loop repeta2
+                loop repeat_loop2
         final:
     
         ; exit(0)

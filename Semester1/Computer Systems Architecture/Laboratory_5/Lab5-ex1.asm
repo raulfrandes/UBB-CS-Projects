@@ -29,25 +29,25 @@ segment code use32 class=code
         MOV ECX, lb              ; length of b
         MOV ESI, b+la-2          ; position ESI on the last element of b
         MOV EDI, r               ; position EDI on r
-        jecxz sir_a              ; jump on the next step if the length of b is 0
-        repeta:
+        jecxz do_a              ; jump on the next step if the length of b is 0
+        repeat_loop:
             STD                  ; DF = 1
             LODSB                ; AL = [b+5] = 1, ESI--
             CLD                  ; DF = 0
             STOSB                ; [EDI] = AL = 1, EDI++
-            loop repeta
-        sir_a:
+            loop repeat_loop
+        do_a:
             MOV ECX, la          ; length of a
             MOV ESI, a           ; position ESI on the first element of a
             CLD                  ; DF = 0
             jecxz final          ; jump to final if the length of a is 0
-            repeta2:
+            repeat_loop2:
                 LODSB            ; AL = [a+0] = 2
                 TEST AL, 01h     ; test parity
                 jz next          ; jump if ZF = 0 (if Al is even)
                 STOSB            ; [EDI] = AL = 1
                 next:
-                    loop repeta2
+                    loop repeat_loop2
     final:
             
         
