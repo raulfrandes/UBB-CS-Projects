@@ -10,7 +10,7 @@ def listManagerSetup(current_list):
     return [current_list, undo_list]
 
 
-def get_current_list(list_manager):
+def getCurrentList(list_manager):
     """
     returns the current list from the list_manager list
     :param list_manager: list_manager
@@ -19,7 +19,7 @@ def get_current_list(list_manager):
     return list_manager[0]
 
 
-def get_undo(list_manager):
+def getUndo(list_manager):
     """
     returns the undo list from the list_manager list
     :param list_manager: list_manager
@@ -28,7 +28,7 @@ def get_undo(list_manager):
     return list_manager[1]
 
 
-def set_current_list(list_manager, previous_list):
+def setCurrentList(list_manager, previous_list):
     """
     modify the current list of the list_manager list with the previous_list list
     :param list_manager: list_manager
@@ -37,7 +37,7 @@ def set_current_list(list_manager, previous_list):
     list_manager[0] = previous_list
 
 
-def set_undo(list_manager, undo_list):
+def setUndo(list_manager, undo_list):
     """
     modify the undo list of the list_manager list with the undo_list list
     :param list_manager: list_manager
@@ -51,10 +51,10 @@ def undo(list_manager):
     undo the last operation
     :param list_manager: list_manager
     """
-    undo_list = get_undo(list_manager)
+    undo_list = getUndo(list_manager)
     if len(undo_list) == 0:
         raise ValueError("Cannot undo anymore!")
     else:
         previous_list = undo_list[-1]
-        set_current_list(list_manager, previous_list)
-        set_undo(list_manager, undo_list[:-1])
+        setCurrentList(list_manager, previous_list)
+        setUndo(list_manager, undo_list[:-1])

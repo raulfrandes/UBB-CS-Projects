@@ -1,281 +1,309 @@
-from domain.list_manager import setup_lista_manager, get_lista_curenta, undo, get_undo
-from domain.complex_number import get_parte_reala, get_parte_imaginara, creeaza_numar_complex
-from business.service import tipareste_parte_imaginara, tipareste_modul_sub_zece, tipareste_modul_egal_zece, \
-    filtrare_parte_reala_prim, suma_numere, produs_numere, sortare_parte_imaginara, filtrare_modul
-from infrastructure.repository import adauga_numar_complex_la_lista, inserare_numar_complex_la_lista, sterge_element, \
-    sterge_interval_de_elemente, inlocuieste_elemente, copie_lista
+from business.service import getImaginaryParts, getModulusBelowTen, getModulusEqualToTen, filterRealPartPrime, \
+    numbersSum, numbersProduct, sortByImaginaryParts, filterModulus
+from domain.complex_number import getRealPart, getImaginaryPart, createComplexNumber
+from domain.list_manager import undo, getCurrentList, listManagerSetup, getUndo
+from infrastructure.repository import addComplexNumberToList, insertComplexNumberInList, deleteElement, \
+    deleteRangeOfElements, replaceElements, copyList
 
 
-def afisare_meniu():
-    print("Meniu:")
-    print(" Citire listă")
-    print("1. Introduceti numerele complexe.")
-    print(" Adaugă număr în listă")
-    print("2. Adaugă număr complex la sfârșitul listei.")
-    print("3. Inserare număr complex pe o poziție dată.")
-    print(" Modifică elemente din listă")
-    print("4. Șterge element de pe o poziție dată.")
-    print("5. Șterge elementele de pe un interval de poziții.")
-    print("6. Înlocuiește toate aparițiile unui număr complex cu un alt număr complex.")
-    print(" Căutare numere")
-    print("7. Tipărește partea imaginara pentru numerele din listă. Se dă intervalul de poziții.")
-    print("8. Tipărește toate numerele complexe care au modulul mai mic decât 10.")
-    print("9. Tipărește toate numerele complexe care au modulul egal cu 10.")
-    print(" Operații cu numerele din listă")
-    print("10. Suma numerelor dintr-o subsecventă dată.")
-    print("11. Produsul numerelor dintr-o subsecventă dată.")
-    print("12. Tipărește lista sortată descrescător după partea imaginara.")
-    print(" Filtrare")
-    print("13. Elimină din listă numerele complexe la care partea reala este numar prim.")
-    print("14. Elimina din lista numerele complexe la care modulul este <,= sau > decât un număr dat.")
-    print(" Undo")
+def printMenu():
+    print("Menu:")
+    print(" Read list: ")
+    print("1. Enter the complex numbers.")
+    print(" Add number: ")
+    print("2. Add a complex number at the end of the list.")
+    print("3. Insert a complex number at a specific position.")
+    print(" Modify the list elements: ")
+    print("4. Delete the element from a specific position.")
+    print("5. Delete the elements from a specific range.")
+    print("6. Replace a specific elements with a new value.")
+    print(" Search numbers: ")
+    print("7. Print all imaginary parts of the complex numbers from a specific range.")
+    print("8. Print all numbers that have the modulus greater less than 10.")
+    print("9. Print all numbers that have the modulus equal to 10.")
+    print(" Operations with the complex numbers: ")
+    print("10. The sum of the numbers from a specific range.")
+    print("11. The product of the numbers from a specific range.")
+    print("12. Print the list sorted in descending order by the imaginary parts of the complex numbers.")
+    print(" Filters: ")
+    print("13. Delete the elements where the real part is a prime number.")
+    print("14. Delete the elements where the modulus is <, = or > than a given number.")
+    print(" Undo: ")
     print("15. Undo")
-    print(" Ieșire")
-    print("16. Iesire.")
+    print(" Exit: ")
+    print("16. Exit.")
 
 
-def convertire_lista(l_memorie):
-    l_afisata = []
-    for i in l_memorie:
-        l_afisata.append(complex(get_parte_reala(i), get_parte_imaginara(i)))
-    return l_afisata
+def convertList(numbers_list):
+    return [complex(getRealPart(x), getImaginaryPart(x)) for x in numbers_list]
 
 
-def citeste_numere():
-    l_memorie = []
-    n = int(input("Introduceti numarul de elemente: "))
+def inputNumbers():
+    n = int(input("Enter the number of elements: "))
+
+    numbers_list = []
     for i in range(n):
-        print("numar ", i+1)
-        parte_reala = int(input("Introduceti partea reala: "))
-        parte_imaginara = int(input("Introduceti parte imaginara: "))
-        numar_complex = creeaza_numar_complex(parte_reala, parte_imaginara)
-        l_memorie.append(numar_complex)
-    return l_memorie
+        print("number ", i + 1)
+        real_part = int(input("Enter the real part: "))
+        imaginary_part = int(input("Enter the imaginary part: "))
+        complex_number = createComplexNumber(real_part, imaginary_part)
+        numbers_list.append(complex_number)
+
+    return numbers_list
 
 
-def adauga_numar_complex_la_lista_ui(l):
-    print("Ce numar complex doriti sa adaugati?")
-    parte_reala = int(input("Introduceti partea reala: "))
-    parte_imaginara = int(input("Introduceti parte imaginara: "))
-    numar_complex = creeaza_numar_complex(parte_reala, parte_imaginara)
-    adauga_numar_complex_la_lista(l, numar_complex)
-    print(convertire_lista(l))
+def addComplexNumberToListUi(numbers_list):
+    print("What complex number do you want to add?")
+    real_part = int(input("Enter the real part: "))
+    imaginary_part = int(input("Enter the imaginary part: "))
+
+    complex_number = createComplexNumber(real_part, imaginary_part)
+    addComplexNumberToList(numbers_list, complex_number)
+
+    print(convertList(numbers_list))
 
 
+def insertComplexNumberInListUi(numbers_list):
+    print("What complex number do you want to insert?")
+    real_part = int(input("Enter the real part: "))
+    imaginary_part = int(input("Enter the imaginary part: "))
+    position = int(input("On which position? "))
 
-def inserare_numar_complex_la_lista_ui(l):
-    print("Ce numar doriti sa inserati?")
-    parte_reala = int(input("Introduceti partea reala: "))
-    parte_imaginara = int(input("Introduceti parte imaginara: "))
-    pozitie = int(input("Pe ce pozitie? "))
-    numar_complex = creeaza_numar_complex(parte_reala, parte_imaginara)
-    inserare_numar_complex_la_lista(l, numar_complex, pozitie-1)
-    print(convertire_lista(l))
+    complex_number = createComplexNumber(real_part, imaginary_part)
+    insertComplexNumberInList(numbers_list, complex_number, position - 1)
 
-
-def sterge_element_ui(l):
-    pozitie = int(input("Elemenetul de pe ce poztie doriti sa il stergeti? "))
-    sterge_element(l, pozitie-1)
-    print(convertire_lista(l))
+    print(convertList(numbers_list))
 
 
-def sterge_interval_de_elemente_ui(l):
-    print("Din ce interval doriti sa stergeti?")
-    inceput_interval = int(input("Introduceti inceputul intervalului: "))
-    sfarsit_interval = int(input("Introduceti sfarsitul intervalului: "))
-    sterge_interval_de_elemente(l, inceput_interval-1, sfarsit_interval-1)
-    print(convertire_lista(l))
+def deleteElementUi(numbers_list):
+    position = int(input("The element from which position do you want to delete? "))
+
+    deleteElement(numbers_list, position - 1)
+
+    print(convertList(numbers_list))
 
 
-def inlocuieste_elemente_ui(l):
-    print("Ce element doriti sa inlocuiti?")
-    parte_reala = int(input("Introduceti partea reala: "))
-    parte_imaginara = int(input("Introduceti parte imaginara: "))
-    numar_initial = creeaza_numar_complex(parte_reala, parte_imaginara)
-    print("Cu ce element doriti ca acesta sa fie inlocuit?")
-    parte_reala_noua = int(input("Introduceti partea reala: "))
-    parte_imaginara_noua = int(input("Introduceti parte imaginara: "))
-    numar_nou = creeaza_numar_complex(parte_reala_noua, parte_imaginara_noua)
-    inlocuieste_elemente(l, numar_initial, numar_nou)
-    print(convertire_lista(l))
+def deleteRangeOfElementsUi(numbers_list):
+    print("From which range do you want to delete?")
+    range_start = int(input("Enter the start of the range: "))
+    range_end = int(input("Enter the end of the range: "))
+
+    deleteRangeOfElements(numbers_list, range_start - 1, range_end - 1)
+
+    print(convertList(numbers_list))
 
 
-def tipareste_parte_imaginara_ui(l):
-    print("Din ce interval doriti sa tipariti?")
-    inceput_interval = int(input("Introduceti inceputul intervalului: "))
-    sfarsit_interval = int(input("Introduceti sfarsitul intervalului: "))
-    print(tipareste_parte_imaginara(l, inceput_interval-1, sfarsit_interval-1))
+def replaceElementsUi(numbers_list):
+    print("What element do you want to be replaced?")
+    real_part = int(input("Enter the real part: "))
+    imaginary_part = int(input("Enter the imaginary part: "))
+
+    initial_value = createComplexNumber(real_part, imaginary_part)
+
+    print("With what value do you want to be replaced with?")
+    new_real_part = int(input("Enter the real part: "))
+    new_imaginary_part = int(input("Enter the imaginary part: "))
+
+    new_value = createComplexNumber(new_real_part, new_imaginary_part)
+    replaceElements(numbers_list, initial_value, new_value)
+
+    print(convertList(numbers_list))
 
 
-def tipareste_modul_sub_zece_ui(l):
-    print(convertire_lista(tipareste_modul_sub_zece(l)))
+def getImaginaryPartsUi(numbers_list):
+    print("From which range do you want to print?")
+    range_start = int(input("Enter the start of the range: "))
+    range_end = int(input("Enter the end of the range: "))
+
+    print(getImaginaryParts(numbers_list, range_start - 1, range_end - 1))
 
 
-def tipareste_modul_egal_zece_ui(l):
-    print(convertire_lista(tipareste_modul_egal_zece(l)))
+def getModulusBelowTenUi(numbers_list):
+    print(convertList(getModulusBelowTen(numbers_list)))
 
 
-def filtrare_parte_reala_prim_ui(l):
-    filtrare_parte_reala_prim(l)
-    print(convertire_lista(l))
+def getModulusEqualToTenUi(numbers_list):
+    print(convertList(getModulusEqualToTen(numbers_list)))
 
 
-def suma_numere_ui(l):
-    rezultat = []
-    print("Din ce interval doriti sa tipariti?")
-    inceput_interval = int(input("Introduceti inceputul intervalului: "))
-    sfarsit_interval = int(input("Introduceti sfarsitul intervalului: "))
-    rezultat.append(suma_numere(l, inceput_interval-1, sfarsit_interval-1))
-    print(convertire_lista(rezultat))
+def filterRealPartPrimeUi(numbers_list):
+    filterRealPartPrime(numbers_list)
+
+    print(convertList(numbers_list))
 
 
-def produs_numere_ui(l):
-    rezultat = []
-    print("Din ce interval doriti sa tipariti?")
-    inceput_interval = int(input("Introduceti inceputul intervalului: "))
-    sfarsit_interval = int(input("Introduceti sfarsitul intervalului: "))
-    rezultat.append(produs_numere(l, inceput_interval - 1, sfarsit_interval - 1))
-    print(convertire_lista(rezultat))
+def numbersSumUi(numbers_list):
+    result = []
+
+    print("From which range do you want to print?")
+    range_start = int(input("Enter the start of the range: "))
+    range_end = int(input("Enter the end of the range: "))
+
+    result.append(numbersSum(numbers_list, range_start - 1, range_end - 1))
+
+    print(convertList(result))
 
 
-def sortare_parte_imaginara_ui(l):
-    sortare_parte_imaginara(l)
-    print(convertire_lista(l))
+def numbersProductUi(numbers_list):
+    result = []
+
+    print("From which range do you want to print?")
+    range_start = int(input("Enter the start of the range: "))
+    range_end = int(input("Enter the end of the range: "))
+
+    result.append(numbersProduct(numbers_list, range_start - 1, range_end - 1))
+
+    print(convertList(result))
 
 
-def filtrare_modul_ui(l):
-    optiune = input("Optiunea dumneavoastra este(<, =, >): ")
-    numar = float(input("Introduceti numarul de comparat: "))
-    filtrare_modul(l, optiune, numar)
-    print(convertire_lista(l))
+def sortByImaginaryPartsUi(numbers_list):
+    sortByImaginaryParts(numbers_list)
+
+    print(convertList(numbers_list))
 
 
-def undo_ui(lista_manager):
-    undo(lista_manager)
-    print(convertire_lista(get_lista_curenta(lista_manager)))
+def filterModulusUi(numbers_list):
+    operator = input("Choose an operator (<, = or >): ")
+    number = float(input("Enter the number compare the modulus to: "))
+
+    filterModulus(numbers_list, operator, number)
+
+    print(convertList(numbers_list))
 
 
-def adauga_numar_complex_la_lista_ui_comanda(l, params):
+def undoUi(list_manager):
+    undo(list_manager)
+    print(convertList(getCurrentList(list_manager)))
+
+
+def addComplexNumberToListUiCommand(numbers_list, params):
     if len(params) != 2:
-        print("numar parametrii invalid!")
+        print("invalid number of arguments!")
         return
-    parte_reala = int(params[0])
-    parte_imaginara = int(params[1])
-    numar_complex = creeaza_numar_complex(parte_reala, parte_imaginara)
-    adauga_numar_complex_la_lista(l, numar_complex)
+
+    real_part = int(params[0])
+    imaginary_part = int(params[1])
+
+    complex_number = createComplexNumber(real_part, imaginary_part)
+    addComplexNumberToList(numbers_list, complex_number)
 
 
-def sterge_element_ui_comanda(l, params):
+def deleteElementUiCommand(numbers_list, params):
     if len(params) != 1:
-        print("numar parametrii invalid!")
+        print("invalid number of arguments!")
         return
-    pozitie = int(params[0])
-    sterge_element(l, pozitie - 1)
+
+    position = int(params[0])
+
+    deleteElement(numbers_list, position - 1)
 
 
-def print_comanda(l, params):
-    print(convertire_lista(l))
+def printCommand(numbers_list, params):
+    print(convertList(numbers_list))
 
 
 def start():
-    afisare_meniu()
+    printMenu()
     while True:
-        optiune_input = input("Introduceti tipul de input: ")
-        if optiune_input == "int":
+        input_option = input("Enter the type of input (int or command): ")
+        if input_option == "int":
             while True:
-                optiune = int(input("Optiunea dumneavoastra este: "))
-                if optiune == 1:
-                    l = citeste_numere()
-                    lista_manager = setup_lista_manager(l)
-                    print(convertire_lista(get_lista_curenta(lista_manager)))
-                elif optiune == 2:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    adauga_numar_complex_la_lista_ui(lista_curenta)
-                elif optiune == 3:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    inserare_numar_complex_la_lista_ui(lista_curenta)
-                elif optiune == 4:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    sterge_element_ui(lista_curenta)
-                elif optiune == 5:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    sterge_interval_de_elemente_ui(lista_curenta)
-                elif optiune == 6:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    inlocuieste_elemente_ui(lista_curenta)
-                elif optiune == 7:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    tipareste_parte_imaginara_ui(lista_curenta)
-                elif optiune == 8:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    tipareste_modul_sub_zece_ui(lista_curenta)
-                elif optiune == 9:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    tipareste_modul_egal_zece_ui(lista_curenta)
-                elif optiune == 10:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    suma_numere_ui(lista_curenta)
-                elif optiune == 11:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    produs_numere_ui(lista_curenta)
-                elif optiune == 12:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    sortare_parte_imaginara_ui(lista_curenta)
-                elif optiune == 13:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    filtrare_parte_reala_prim_ui(lista_curenta)
-                elif optiune == 14:
-                    lista_curenta = get_lista_curenta(lista_manager)
-                    undo_list = get_undo(lista_manager)
-                    undo_list.append(copie_lista(lista_curenta))
-                    filtrare_modul_ui(lista_curenta)
-                elif optiune == 15:
-                    undo_ui(lista_manager)
-                elif optiune == 16:
+                option = int(input("Your option is: "))
+                list_manager = []
+                if option == 1:
+                    numbers_list = inputNumbers()
+                    list_manager = listManagerSetup(numbers_list)
+                    print(convertList(getCurrentList(list_manager)))
+                elif option == 2:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    addComplexNumberToListUi(current_list)
+                elif option == 3:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    insertComplexNumberInListUi(current_list)
+                elif option == 4:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    deleteElementUi(current_list)
+                elif option == 5:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    deleteRangeOfElementsUi(current_list)
+                elif option == 6:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    replaceElementsUi(current_list)
+                elif option == 7:
+                    current_list = getCurrentList(list_manager)
+                    getImaginaryPartsUi(current_list)
+                elif option == 8:
+                    current_list = getCurrentList(list_manager)
+                    getModulusBelowTenUi(current_list)
+                elif option == 9:
+                    current_list = getCurrentList(list_manager)
+                    getModulusEqualToTenUi(current_list)
+                elif option == 10:
+                    current_list = getCurrentList(list_manager)
+                    numbersSumUi(current_list)
+                elif option == 11:
+                    current_list = getCurrentList(list_manager)
+                    numbersProductUi(current_list)
+                elif option == 12:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    sortByImaginaryPartsUi(current_list)
+                elif option == 13:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    filterRealPartPrimeUi(current_list)
+                elif option == 14:
+                    current_list = getCurrentList(list_manager)
+                    undo_list = getUndo(list_manager)
+                    undo_list.append(copyList(current_list))
+                    filterModulusUi(current_list)
+                elif option == 15:
+                    undoUi(list_manager)
+                elif option == 16:
                     return
-        elif optiune_input == "comanda":
+        elif input_option == "command":
             while True:
-                comenzi = {
-                    "adauga": adauga_numar_complex_la_lista_ui_comanda,
-                    "sterge": sterge_element_ui_comanda,
-                    "undo": undo_ui
+                commands = {
+                    "add": addComplexNumberToListUiCommand,
+                    "delete": deleteElementUiCommand,
+                    "undo": undoUi
                 }
-                sir_comenzi = input(">>>")
-                if sir_comenzi == "":
+                commands_array = input(">>>")
+                list_manager = []
+                numbers_list = []
+                if commands_array == "":
                     continue
-                elif sir_comenzi == "exit":
+                elif commands_array == "exit":
                     return
-                elif sir_comenzi == "citire":
-                    l = citeste_numere()
-                    lista_manager = setup_lista_manager(l)
-                elif sir_comenzi == "undo":
-                    undo_ui(lista_manager)
+                elif commands_array == "input":
+                    numbers_list = inputNumbers()
+                    list_manager = listManagerSetup(numbers_list)
+                elif commands_array == "undo":
+                    undoUi(list_manager)
                 else:
-                    sir_comanda = sir_comenzi.split(';')
-                    for i in sir_comanda:
-                        element_comanda = i.split()
-                        nume_comanda = str(element_comanda[0])
-                        params = element_comanda[1:]
-                        if nume_comanda in comenzi:
+                    command_array = commands_array.split(';')
+                    for i in command_array:
+                        command_element = i.split()
+                        command_name = str(command_element[0])
+                        params = command_element[1:]
+                        if command_name in commands:
                             try:
-                                lista_curenta = get_lista_curenta(lista_manager)
-                                undo_list = get_undo(lista_manager)
-                                undo_list.append(copie_lista(lista_curenta))
-                                comenzi[nume_comanda](l, params)
+                                current_list = getCurrentList(list_manager)
+                                undo_list = getUndo(list_manager)
+                                undo_list.append(copyList(current_list))
+                                commands[command_name](numbers_list, params)
                             except ValueError as ve:
                                 print(ve)
-                    print(convertire_lista(l))
+                    print(convertList(numbers_list))
