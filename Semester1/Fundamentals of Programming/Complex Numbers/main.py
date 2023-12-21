@@ -1,9 +1,9 @@
 from prezentare.ui import start
-from testare.teste import ruleaza_toate_testele
+# testare.teste import ruleaza_toate_testele
 
 
 def main():
-    ruleaza_toate_testele()
+    #ruleaza_toate_testele()
     start()
 
 

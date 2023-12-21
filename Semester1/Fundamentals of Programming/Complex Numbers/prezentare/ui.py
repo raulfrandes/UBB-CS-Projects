@@ -1,9 +1,8 @@
 from business.service import getImaginaryParts, getModulusBelowTen, getModulusEqualToTen, filterRealPartPrime, \
-    numbersSum, numbersProduct, sortByImaginaryParts, filterModulus
+    numbersSum, numbersProduct, sortByImaginaryParts, filterModulus, doUndo
 from domain.complex_number import getRealPart, getImaginaryPart, createComplexNumber
-from domain.list_manager import undo, getCurrentList, listManagerSetup, getUndo
 from infrastructure.repository import addComplexNumberToList, insertComplexNumberInList, deleteElement, \
-    deleteRangeOfElements, replaceElements, copyList
+    deleteRangeOfElements, replaceElements
 
 
 def printMenu():
@@ -38,10 +37,9 @@ def convertList(numbers_list):
     return [complex(getRealPart(x), getImaginaryPart(x)) for x in numbers_list]
 
 
-def inputNumbers():
+def inputNumbers(numbers_list):
     n = int(input("Enter the number of elements: "))
 
-    numbers_list = []
     for i in range(n):
         print("number ", i + 1)
         real_part = int(input("Enter the real part: "))
@@ -49,51 +47,51 @@ def inputNumbers():
         complex_number = createComplexNumber(real_part, imaginary_part)
         numbers_list.append(complex_number)
 
-    return numbers_list
+    print(convertList(numbers_list))
 
 
-def addComplexNumberToListUi(numbers_list):
+def addComplexNumberToListUi(numbers_list, undo_list):
     print("What complex number do you want to add?")
     real_part = int(input("Enter the real part: "))
     imaginary_part = int(input("Enter the imaginary part: "))
 
     complex_number = createComplexNumber(real_part, imaginary_part)
-    addComplexNumberToList(numbers_list, complex_number)
+    addComplexNumberToList(numbers_list, complex_number, undo_list)
 
     print(convertList(numbers_list))
 
 
-def insertComplexNumberInListUi(numbers_list):
+def insertComplexNumberInListUi(numbers_list, undo_list):
     print("What complex number do you want to insert?")
     real_part = int(input("Enter the real part: "))
     imaginary_part = int(input("Enter the imaginary part: "))
     position = int(input("On which position? "))
 
     complex_number = createComplexNumber(real_part, imaginary_part)
-    insertComplexNumberInList(numbers_list, complex_number, position - 1)
+    insertComplexNumberInList(numbers_list, complex_number, position - 1, undo_list)
 
     print(convertList(numbers_list))
 
 
-def deleteElementUi(numbers_list):
+def deleteElementUi(numbers_list, undo_list):
     position = int(input("The element from which position do you want to delete? "))
 
-    deleteElement(numbers_list, position - 1)
+    deleteElement(numbers_list, position - 1, undo_list)
 
     print(convertList(numbers_list))
 
 
-def deleteRangeOfElementsUi(numbers_list):
+def deleteRangeOfElementsUi(numbers_list, undo_list):
     print("From which range do you want to delete?")
     range_start = int(input("Enter the start of the range: "))
     range_end = int(input("Enter the end of the range: "))
 
-    deleteRangeOfElements(numbers_list, range_start - 1, range_end - 1)
+    deleteRangeOfElements(numbers_list, range_start - 1, range_end - 1, undo_list)
 
     print(convertList(numbers_list))
 
 
-def replaceElementsUi(numbers_list):
+def replaceElementsUi(numbers_list, undo_list):
     print("What element do you want to be replaced?")
     real_part = int(input("Enter the real part: "))
     imaginary_part = int(input("Enter the imaginary part: "))
@@ -105,7 +103,7 @@ def replaceElementsUi(numbers_list):
     new_imaginary_part = int(input("Enter the imaginary part: "))
 
     new_value = createComplexNumber(new_real_part, new_imaginary_part)
-    replaceElements(numbers_list, initial_value, new_value)
+    replaceElements(numbers_list, initial_value, new_value, undo_list)
 
     print(convertList(numbers_list))
 
@@ -127,9 +125,7 @@ def getModulusEqualToTenUi(numbers_list):
 
 
 def filterRealPartPrimeUi(numbers_list):
-    filterRealPartPrime(numbers_list)
-
-    print(convertList(numbers_list))
+    print(convertList(filterRealPartPrime(numbers_list)))
 
 
 def numbersSumUi(numbers_list):
@@ -157,26 +153,22 @@ def numbersProductUi(numbers_list):
 
 
 def sortByImaginaryPartsUi(numbers_list):
-    sortByImaginaryParts(numbers_list)
-
-    print(convertList(numbers_list))
+    print(convertList(sortByImaginaryParts(numbers_list)))
 
 
 def filterModulusUi(numbers_list):
     operator = input("Choose an operator (<, = or >): ")
     number = float(input("Enter the number compare the modulus to: "))
 
-    filterModulus(numbers_list, operator, number)
+    print(convertList(filterModulus(numbers_list, operator, number)))
 
+
+def doUndoUi(numbers_list, undo_list):
+    doUndo(numbers_list, undo_list)
     print(convertList(numbers_list))
 
 
-def undoUi(list_manager):
-    undo(list_manager)
-    print(convertList(getCurrentList(list_manager)))
-
-
-def addComplexNumberToListUiCommand(numbers_list, params):
+def addComplexNumberToListUiCommand(numbers_list, params, undo_list):
     if len(params) != 2:
         print("invalid number of arguments!")
         return
@@ -185,17 +177,17 @@ def addComplexNumberToListUiCommand(numbers_list, params):
     imaginary_part = int(params[1])
 
     complex_number = createComplexNumber(real_part, imaginary_part)
-    addComplexNumberToList(numbers_list, complex_number)
+    addComplexNumberToList(numbers_list, complex_number, undo_list)
 
 
-def deleteElementUiCommand(numbers_list, params):
+def deleteElementUiCommand(numbers_list, params, undo_list):
     if len(params) != 1:
         print("invalid number of arguments!")
         return
 
     position = int(params[0])
 
-    deleteElement(numbers_list, position - 1)
+    deleteElement(numbers_list, position - 1, undo_list)
 
 
 def printCommand(numbers_list, params):
@@ -203,74 +195,44 @@ def printCommand(numbers_list, params):
 
 
 def start():
+    numbers_list = []
+    undo_list = []
     printMenu()
     while True:
         input_option = input("Enter the type of input (int or command): ")
         if input_option == "int":
             while True:
                 option = int(input("Your option is: "))
-                list_manager = []
                 if option == 1:
-                    numbers_list = inputNumbers()
-                    list_manager = listManagerSetup(numbers_list)
-                    print(convertList(getCurrentList(list_manager)))
+                    inputNumbers(numbers_list)
                 elif option == 2:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    addComplexNumberToListUi(current_list)
+                    addComplexNumberToListUi(numbers_list, undo_list)
                 elif option == 3:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    insertComplexNumberInListUi(current_list)
+                    insertComplexNumberInListUi(numbers_list, undo_list)
                 elif option == 4:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    deleteElementUi(current_list)
+                    deleteElementUi(numbers_list, undo_list)
                 elif option == 5:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    deleteRangeOfElementsUi(current_list)
+                    deleteRangeOfElementsUi(numbers_list, undo_list)
                 elif option == 6:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    replaceElementsUi(current_list)
+                    replaceElementsUi(numbers_list, undo_list)
                 elif option == 7:
-                    current_list = getCurrentList(list_manager)
-                    getImaginaryPartsUi(current_list)
+                    getImaginaryPartsUi(numbers_list)
                 elif option == 8:
-                    current_list = getCurrentList(list_manager)
-                    getModulusBelowTenUi(current_list)
+                    getModulusBelowTenUi(numbers_list)
                 elif option == 9:
-                    current_list = getCurrentList(list_manager)
-                    getModulusEqualToTenUi(current_list)
+                    getModulusEqualToTenUi(numbers_list)
                 elif option == 10:
-                    current_list = getCurrentList(list_manager)
-                    numbersSumUi(current_list)
+                    numbersSumUi(numbers_list)
                 elif option == 11:
-                    current_list = getCurrentList(list_manager)
-                    numbersProductUi(current_list)
+                    numbersProductUi(numbers_list)
                 elif option == 12:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    sortByImaginaryPartsUi(current_list)
+                    sortByImaginaryPartsUi(numbers_list)
                 elif option == 13:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    filterRealPartPrimeUi(current_list)
+                    filterRealPartPrimeUi(numbers_list)
                 elif option == 14:
-                    current_list = getCurrentList(list_manager)
-                    undo_list = getUndo(list_manager)
-                    undo_list.append(copyList(current_list))
-                    filterModulusUi(current_list)
+                    filterModulusUi(numbers_list)
                 elif option == 15:
-                    undoUi(list_manager)
+                    doUndoUi(numbers_list, undo_list)
                 elif option == 16:
                     return
         elif input_option == "command":
@@ -278,20 +240,17 @@ def start():
                 commands = {
                     "add": addComplexNumberToListUiCommand,
                     "delete": deleteElementUiCommand,
-                    "undo": undoUi
+                    "undo": doUndoUi
                 }
                 commands_array = input(">>>")
-                list_manager = []
-                numbers_list = []
                 if commands_array == "":
                     continue
                 elif commands_array == "exit":
                     return
                 elif commands_array == "input":
-                    numbers_list = inputNumbers()
-                    list_manager = listManagerSetup(numbers_list)
+                    inputNumbers(numbers_list)
                 elif commands_array == "undo":
-                    undoUi(list_manager)
+                    doUndoUi(numbers_list, undo_list)
                 else:
                     command_array = commands_array.split(';')
                     for i in command_array:
@@ -300,10 +259,7 @@ def start():
                         params = command_element[1:]
                         if command_name in commands:
                             try:
-                                current_list = getCurrentList(list_manager)
-                                undo_list = getUndo(list_manager)
-                                undo_list.append(copyList(current_list))
-                                commands[command_name](numbers_list, params)
+                                commands[command_name](numbers_list, params, undo_list)
                             except ValueError as ve:
                                 print(ve)
                     print(convertList(numbers_list))

@@ -1,5 +1,7 @@
 import math
 
+from business.undo import undoAddComplexNumberToList, undoInsertComplexNumberInList, undoDeleteElement, \
+    undoDeleteRangeOfElements, undoReplaceElements
 from domain.complex_number import getImaginaryPart, getRealPart, createComplexNumber
 
 
@@ -82,9 +84,9 @@ def filterRealPartPrime(numbers_list):
     """
     deletes all the complex numbers where the real part is a prime number from the numbers_list list
     :param numbers_list: list
+    :return: list - the list of complex numbers where the real part is not a prime number
     """
-    filtered_list = [x for x in numbers_list if not primeNumber(getRealPart(x))]
-    numbers_list[:] = filtered_list
+    return [x for x in numbers_list if not primeNumber(getRealPart(x))]
 
 
 def numbersSum(numbers_list, start, end):
@@ -142,25 +144,52 @@ def sortByImaginaryParts(numbers_list):
     """
     sort the numbers_list list in descending order by the imaginary part of the complex numbers
     :param numbers_list: list
+    :return: list - the sorted numbers_list in descending order by the imaginary parts
     """
-    numbers_list.sort(reverse=True, key=getImaginaryPart)
+    sorted_list = numbers_list
+    sorted_list.sort(reverse=True, key=getImaginaryPart)
+    return sorted_list
 
 
 def filterModulus(numbers_list, operator, number):
     """
-    delete all complex numbers from numbers_list list where the modulus is <, = or > then the given number,
-    elimina din lista l numerele complexe la care modulul este <, =, > decat un numarul numar dat, depending on the
-    chosen operator
+    delete all complex numbers from numbers_list list where the modulus is <, = or > than the given number, depending on
+    the chosen operator
     :param numbers_list: list
     :param operator: string
     :param number: float
+    :return: list - the filtered list of complex numbers where the modulus is <, = or > than the given number
     """
     if str(operator) == '<':
-        filtered_list = [x for x in numbers_list if modulus(x) < number]
-        numbers_list[:] = filtered_list
-    elif str(operator) == '=':
-        filtered_list = [x for x in numbers_list if abs(modulus(x) - number) < 0.00001]
-        numbers_list[:] = filtered_list
-    elif str(operator) == '>':
-        filtered_list = [x for x in numbers_list if modulus(x) > number]
-        numbers_list[:] = filtered_list
+        return [x for x in numbers_list if modulus(x) < number]
+
+    if str(operator) == '=':
+        return [x for x in numbers_list if abs(modulus(x) - number) < 0.00001]
+
+    if str(operator) == '>':
+        return [x for x in numbers_list if modulus(x) > number]
+
+
+def doUndo(numbers_list, undo_list):
+    """
+    reverts the last operation
+    :param numbers_list: list
+    :param undo_list: list
+    :raises: ValueError - if the undo list is empty throw ValueError exception with the error message
+                            "Cannot undo anymore!\n"
+    """
+    if len(undo_list) == 0:
+        raise ValueError("Cannot undo anymore!\n")
+
+    undo_operation = undo_list.pop()
+    if undo_operation["operation"] == "add":
+        undoAddComplexNumberToList(numbers_list)
+    elif undo_operation["operation"] == "insert":
+        undoInsertComplexNumberInList(numbers_list, undo_operation["param"])
+    elif undo_operation["operation"] == "deleteElement":
+        undoDeleteElement(numbers_list, undo_operation["param"][0], undo_operation["param"][1])
+    elif undo_operation["operation"] == "deleteRange":
+        undoDeleteRangeOfElements(numbers_list, undo_operation["param"][0], undo_operation["param"][1],
+                                  undo_operation["param"][2])
+    elif undo_operation["operation"] == "replace":
+        undoReplaceElements(numbers_list, undo_operation["param"][1], undo_operation["param"][0])
