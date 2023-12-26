@@ -1,10 +1,7 @@
-from prezentare.ui import start
-# testare.teste import ruleaza_toate_testele
+from presentation.ui import start
+from testing.tests import runAllTests
 
 
-def main():
-    #ruleaza_toate_testele()
+if __name__ == "__main__":
+    runAllTests()
     start()
-
-
-main()

@@ -190,10 +190,6 @@ def deleteElementUiCommand(numbers_list, params, undo_list):
     deleteElement(numbers_list, position - 1, undo_list)
 
 
-def printCommand(numbers_list, params):
-    print(convertList(numbers_list))
-
-
 def start():
     numbers_list = []
     undo_list = []
