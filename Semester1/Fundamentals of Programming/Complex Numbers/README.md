@@ -1,4 +1,4 @@
-# Complex numbers app
+# Complex numbers console application
 
 The program manages a list of complex numbers and allows the following actions to be performed repeatedly:
 
