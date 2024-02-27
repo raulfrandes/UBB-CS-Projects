@@ -1,0 +1,2 @@
+# Moore's algorithm for an unweighted directed graph. 
+The data is read from the graf.txt file. The first line in graph.txt contains the number of vertices, and the following lines contain the edges of the graph. The program determines the shortest path from a vertex (the source and destination vertex are read from the keyboard).
