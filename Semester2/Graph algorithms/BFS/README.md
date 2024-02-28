@@ -1,0 +1,1 @@
+For the undirected graph in the graph.txt file, the program will display on the screen the vertices discovered by the BFS algorithm and the distance from the source vertex (the discovered tree).
