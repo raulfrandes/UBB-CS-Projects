@@ -1,0 +1,2 @@
+# Transitive closure of a directed graph. 
+Transitive closure is represented as the matrix that describes, for each vertex, which vertices are reachable from this vertex. The transitive closure matrix shows where each vertex can be reached.
