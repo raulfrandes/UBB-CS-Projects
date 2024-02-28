@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab_8.controller.ComposeController">
+   <children>
+      <GridPane layoutX="14.0" layoutY="22.0" prefHeight="91.0" prefWidth="474.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.20001220703125" minWidth="10.0" prefWidth="52.99999237060547" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.00000762939453" minWidth="10.0" prefWidth="421.00000762939453" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="From:" />
+            <Label text="To:" GridPane.rowIndex="1" />
+            <TextField fx:id="textFieldFrom" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="textFieldTo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <TextArea fx:id="textAreaMessage" layoutX="13.0" layoutY="131.0" prefHeight="166.0" prefWidth="474.0" />
+      <Label layoutX="14.0" layoutY="113.0" prefHeight="18.0" prefWidth="99.0" text="Message:" />
+      <Button layoutX="158.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleSend" text="Send" />
+      <Button layoutX="298.0" layoutY="310.0" mnemonicParsing="false" text="Cancel" />
+   </children>
+</AnchorPane>

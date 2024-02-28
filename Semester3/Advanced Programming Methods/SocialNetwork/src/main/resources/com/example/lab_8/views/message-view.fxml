@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab_8.controller.MessageController">
+   <children>
+      <ListView fx:id="userList" layoutX="33.0" layoutY="86.0" prefHeight="362.0" prefWidth="200.0" />
+      <Label fx:id="chatLabel" layoutX="270.0" layoutY="34.0" prefHeight="34.0" prefWidth="298.0" text="Label">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Label>
+      <TextArea fx:id="textAreaMessage" layoutX="270.0" layoutY="400.0" prefHeight="47.0" prefWidth="319.0" />
+      <Button layoutX="619.0" layoutY="411.0" mnemonicParsing="false" onAction="#handleSend" text="Send" />
+      <Button layoutX="601.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleCompose" text="Compose" />
+      <Label layoutX="107.0" layoutY="40.0" text="Chats">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font></Label>
+      <ListView fx:id="messageList" layoutX="270.0" layoutY="86.0" prefHeight="301.0" prefWidth="399.0" />
+   </children>
+</AnchorPane>
