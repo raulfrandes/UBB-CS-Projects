@@ -1,0 +1,1 @@
+For the graph in the graph.txt file, the program will print on the screen the vertices discovered by the DFS algorithm (the forests discovered by DFS).
