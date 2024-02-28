@@ -6,8 +6,8 @@
 
 using namespace std;
 
-void init(vector<vector<pair<int, int>>> list_ad, int s, vector<int>& d, vector<int>& pi) {
-	for (int i = 0; i < list_ad.size(); i++) {
+void init(vector<vector<pair<int, int>>> adj_list, int s, vector<int>& d, vector<int>& pi) {
+	for (int i = 0; i < adj_list.size(); i++) {
 		d[i] = INT_MAX - 100;
 		pi[i] = -1;
 	}
@@ -45,27 +45,27 @@ bool BellmanFord(vector<vector<pair<int, int>>> adj_list, int s, vector<int>& d,
 	return true;
 }
 
-void Dijkstra(vector<vector<pair<int, int>>> list_ad, int s, vector<int>& d, vector<int>& pi) {
-	init(list_ad, s, d, pi);
+void Dijkstra(vector<vector<pair<int, int>>> adj_list, int s, vector<int>& d, vector<int>& pi) {
+	init(adj_list, s, d, pi);
 	vector<int> S;
 	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> Q;
-	for (int i = 0; i < list_ad.size(); i++) {
-		Q.push(make_pair(i, d[i]));
+	for (int i = 0; i < adj_list.size(); i++) {
+		Q.push(make_pair(d[i], i));
 	}
 	while (!Q.empty()) {
-		int u = Q.top().first;
+		int u = Q.top().second;
 		Q.pop();
 		S.push_back(u);
-		for (int i = 0; i < list_ad[u].size(); i++) {
-			int v = list_ad[u][i].first;
-			relax(u, v, list_ad[u][i].second, d, pi);
+		for (int i = 0; i < adj_list[u].size(); i++) {
+			int v = adj_list[u][i].first;
+			relax(u, v, adj_list[u][i].second, d, pi);
 		}
 		while (!Q.empty()) {
 			Q.pop();
 		}
-		for (int i = 0; i < list_ad.size(); i++) {
+		for (int i = 0; i < adj_list.size(); i++) {
 			if (!count(S.begin(), S.end(), i)) {
-				Q.push(make_pair(i, d[i]));
+				Q.push(make_pair(d[i], i));
 			}
 		}
 	}
