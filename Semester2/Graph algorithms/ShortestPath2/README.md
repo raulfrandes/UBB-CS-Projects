@@ -1,0 +1,10 @@
+﻿# Johnson
+For a weighted sparse directed graph, the program calculates the minimum cost from each vertex to each reachable vertex from it using Johnson's algorithm.
+
+Input and output file paths are given as parameters on the command line, the first being the input file path and the second being the output file path.
+
+### The input file:
+The input file contains on the first line 2 numbers separated by space: V E. V represents the number of vertices of the graph. E represents the number of arcs of the graph. The following E lines contain 3 numbers separated by space, each representing an arc: x y w. x is the source node of the arc, y is the destination node, and w is the weight. Vertex indexing starts from 0.
+
+### The output file:
+The output file will contain one line or E + V lines. If the graph given in the input file contains a negative cost circuit, the output file will contain a single line with the value -1. If the graph does not contain any negative cost circuits, the output file will contain E + V lines, having the meaning described below. The first E lines represent the edges of the graph after reweighting. Each line will consist of 3 values ​​separated by space, each representing an arc: x y 𝑤 . x is the source node of the arc, y is destination node, and 𝑤 is the new arc weight. Arcs will be sorted first by node source, then after the destination node. The following V lines represent the distance matrix, each of these lines containing V values. Line i of the matrix (line V + i of the output file) represents the path costs of minimum cost from source vertex i to all vertices of the graph. The value at position j of the line i represents the minimum cost from source vertex i to vertex j. If vertex j is unreachable from vertex i, then the string "INF" will be written on position j of line i.
