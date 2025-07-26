@@ -1,0 +1,7 @@
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\bin\Debug\Bills.exe
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\bin\Debug\Bills.pdb
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\obj\Debug\Bills.csproj.AssemblyReference.cache
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\obj\Debug\Bills.csproj.SuggestedBindingRedirects.cache
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\obj\Debug\Bills.csproj.CoreCompileInputs.cache
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\obj\Debug\Bills.exe
+D:\Anul2\Semestrul1\Metode avansate de programare\Laboratoare\Lab11\Bills\Bills\obj\Debug\Bills.pdb
