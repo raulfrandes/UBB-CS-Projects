@@ -1,0 +1,6 @@
+D:\Anul2\Semestrul2\Sisteme de Gestiune a Bazelor de Date\Laboratoare\Laborator4\Lab4\Lab4\bin\Debug\Lab4.exe
+D:\Anul2\Semestrul2\Sisteme de Gestiune a Bazelor de Date\Laboratoare\Laborator4\Lab4\Lab4\bin\Debug\Lab4.pdb
+D:\Anul2\Semestrul2\Sisteme de Gestiune a Bazelor de Date\Laboratoare\Laborator4\Lab4\Lab4\obj\Debug\Lab4.csproj.AssemblyReference.cache
+D:\Anul2\Semestrul2\Sisteme de Gestiune a Bazelor de Date\Laboratoare\Laborator4\Lab4\Lab4\obj\Debug\Lab4.csproj.CoreCompileInputs.cache
+D:\Anul2\Semestrul2\Sisteme de Gestiune a Bazelor de Date\Laboratoare\Laborator4\Lab4\Lab4\obj\Debug\Lab4.exe
+D:\Anul2\Semestrul2\Sisteme de Gestiune a Bazelor de Date\Laboratoare\Laborator4\Lab4\Lab4\obj\Debug\Lab4.pdb

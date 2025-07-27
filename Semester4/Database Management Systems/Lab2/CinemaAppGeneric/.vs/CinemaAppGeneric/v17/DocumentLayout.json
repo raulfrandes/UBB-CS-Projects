@@ -1,0 +1,113 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\cinemaappgeneric\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|solutionrelative:cinemaappgeneric\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|d:\\anul2\\semestrul2\\sisteme de gestiune a bazelor de date\\laboratoare\\laborator2\\cinemaappgeneric\\cinemaappgeneric\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|solutionrelative:cinemaappgeneric\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\cinemaappgeneric\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|solutionrelative:cinemaappgeneric\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\cinemaappgeneric\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|solutionrelative:cinemaappgeneric\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\cinemaappgeneric\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BED6098B-8BE1-4801-ADC2-910C5B49F919}|CinemaAppGeneric\\CinemaAppGeneric.csproj|solutionrelative:cinemaappgeneric\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "CinemaAppGeneric\\Form1.Designer.cs",
+              "ToolTip": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Form1.Designer.cs",
+              "RelativeToolTip": "CinemaAppGeneric\\Form1.Designer.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAYwEcAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T19:01:31.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\App.config",
+              "RelativeDocumentMoniker": "CinemaAppGeneric\\App.config",
+              "ToolTip": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\App.config",
+              "RelativeToolTip": "CinemaAppGeneric\\App.config",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAuwB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-04-15T17:29:53.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Form1.cs",
+              "RelativeDocumentMoniker": "CinemaAppGeneric\\Form1.cs",
+              "ToolTip": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Form1.cs [Design]",
+              "RelativeToolTip": "CinemaAppGeneric\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T17:27:47.98Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Program.cs",
+              "RelativeDocumentMoniker": "CinemaAppGeneric\\Program.cs",
+              "ToolTip": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Program.cs",
+              "RelativeToolTip": "CinemaAppGeneric\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T17:27:44.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Form1.cs",
+              "RelativeDocumentMoniker": "CinemaAppGeneric\\Form1.cs",
+              "ToolTip": "D:\\Anul2\\Semestrul2\\Sisteme de Gestiune a Bazelor de Date\\Laboratoare\\Laborator2\\CinemaAppGeneric\\CinemaAppGeneric\\Form1.cs",
+              "RelativeToolTip": "CinemaAppGeneric\\Form1.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAApwCUAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T17:27:35.495Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
