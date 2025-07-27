@@ -1,0 +1,21 @@
+ul {
+    list-style-type: none;
+    width: 22%;
+    padding: 10px;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.portrait {
+    padding: 15px;
+    margin: 10px;
+    background-color: cyan;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}

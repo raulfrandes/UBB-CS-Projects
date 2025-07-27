@@ -1,0 +1,22 @@
+label {
+    padding: 10px;
+}
+
+input {
+    margin: 5px;
+    background-image: url(squares.png);
+    background-size: 525px;
+    background-position: -2px -3px;
+    font-family: monospace;
+    letter-spacing: 19px;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+.name {
+    width: 525px;
+}
+
+.cnp {
+    width: 342px;
+}

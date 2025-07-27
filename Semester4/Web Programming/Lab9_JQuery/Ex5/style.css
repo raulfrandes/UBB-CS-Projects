@@ -1,0 +1,36 @@
+#previous, #next {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#imageList {
+    display: flex;
+    justify-content: center; 
+    list-style: none; 
+    padding: 0;
+}
+
+#imageList li {
+    display: none; 
+    position: relative;
+}
+
+#imageList li.visible {
+    display: block;
+}
+
+img {
+    width: 500px;
+    height: 500px;
+}
+
+.overlay {
+    position: absolute;
+    top: 300px; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-decoration: none;
+    padding: 8px;
+}

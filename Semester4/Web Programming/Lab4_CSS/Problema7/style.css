@@ -1,0 +1,40 @@
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 150px;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    position: relative;
+    margin-left: 300px;
+}
+
+ul li::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+.alice::before {
+    content: url("alice.png");
+    position: absolute;
+    left: -150px;
+    top: 30%;
+}
+
+.bob::before {
+    content: url("bob.png");
+    position: absolute;
+    left: -150px;
+    top: 30%;
+}
+

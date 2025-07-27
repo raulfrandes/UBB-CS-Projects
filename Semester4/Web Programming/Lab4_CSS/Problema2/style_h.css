@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+header {
+    background-color: red;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    background-color: yellow;
+    display: flex;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    flex: auto;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.content {
+    background-color: green;
+    padding-top: 16%;
+    padding-bottom: 16%;
+}
+
+footer {
+    background-color: pink;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}

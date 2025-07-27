@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ro">
+
+<head>
+    <title>Formular de aplicare pentru actori</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div>
+        <table border="1" width="50%" align="center">
+            <tr bgcolor="cyan">
+                <th>Formular de aplicare pentru actori</th>
+            </tr>
+            <tr>
+                <td align="center">
+                    <form action="process_form.php" method="get">
+                        <fieldset>
+                            <legend>Date personale</legend>
+                            <label for="nume">Nume:</label>
+                            <input type="text" id="nume" name="nume" size="15">
+
+                            <label for="prenume">Prenume:</label>
+                            <input type="text" id="prenume" name="prenume">
+                            <br>
+
+                            <label for="data">Data de na&#351;tere:</label>
+                            <input type="text" id="data" name="data">
+
+                            <label>Gen:</label>
+                            <input type="radio" id="F" name="gen" value="feminin">
+                            <label for="F">F</label>
+                            <input type="radio" id="M" name="gen" value="masculin">
+                            <label for="M">M</label>
+
+                            <label for="xp">Experien&#355;&#259; (ani):</label>
+                            <input type="text" id="xp" name="xp">
+                            <br>
+
+                            <label for="tel">Telefon:</label>
+                            <input type="text" id="tel" name="tel" maxlength="12">
+
+                            <label for="mail">E-mail:</label>
+                            <input type="text" id="mail" name="mail" readonly>
+                        </fieldset>
+                    </form>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center">
+                    <form action="process_form.php" method="post">
+                        <fieldset>
+                            <legend>Caracteristici pe care le c&#259;utam</legend>
+                            <label>Limbi vorbite: </label><br>
+                            <input type="checkbox" name="romana" checked> Rom&#226;n&#259; <br>
+                            <input type="checkbox" name="engleza"> Englez&#259; <br>
+                            <input type="checkbox" name="spaniola"> Spaniol&#259; <br>
+
+                            <label>Abilit&#259;&#355;i actorie</label>
+                            <select name="abilitati-actorie" multiple>
+                                <option value="drama">Dram&#259;</option>
+                                <option value="comedie">Comedie</option>
+                                <option value="actiune">Ac&#355;iune</option>
+                                <option value="muzical">Muzical</option>
+                                <option value="improvizatie">Improviza&#355;ie</option>
+                                <option value="dublaj">Dublaj</option>
+                            </select>
+
+                            <label>Culoarea ochilor:</label>
+                            <select name="culoarea-ochilor">
+                                <option value="albastrii">Alba&#351;trii</option>
+                                <option value="caprui">C&#259;prui</option>
+                                <option value="verzi" selected>Verzi</option>
+                                <option value="negri" disabled>Negri</option>
+                            </select> <br>
+
+                            <label>&#206;n&#259;l&#355;ime</label>
+                            <input type="text" name="inaltime"> 
+
+                            <label>Nivel experien&#355;&#259;:</label>
+                            <input type="radio" id="incepator" name="nivel-experienta" value="incepator">
+                            <label for="incepator">&#206;ncep&#259;tor</label>
+                            <input type="radio" id="intermediar" name="nivel-experienta" value="intermediar">
+                            <label for="intermediar">Intermediar</label>
+                            <input type="radio" id="avansat" name="nivel-experienta" value="avansat">
+                            <label for="avansat">Avansat</label>
+                            <input type="radio" id="profesionist" name="nivel-experienta" value="profesionist">
+                            <label for="profesionist">Profesionist</label>
+                    </fieldset>
+                </form>
+                </td>
+            </tr>
+
+            <tr>
+                <th bgcolor="cyan">Despre tine</th>
+            </tr>
+
+            <tr>
+                <td width="50%">
+                    <center><p>Poveste&#351;te-ne <br> despre tine: </p></center>
+                    <center><textarea name="message" rows="10" cols="30">Hobby-uri, experien&#355;e anterioare, etc.</textarea></center>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="center">
+                    <img src="https://t4.ftcdn.net/jpg/03/40/12/49/360_F_340124934_bz3pQTLrdFpH92ekknuaTHy8JuXgG7fi.jpg"
+                        alt="no picture set" width="50px" height="50px">
+                    <label for="poza">&#206;ncarc&#259; o poz&#259;:</label>
+                    <input type="file" id="poza" name="poza">
+                </td>
+            </tr>
+
+            <tr>
+                <td >
+                    CV: 
+                    <label for="cv">&#206;ncarc&#259; CV:</label>
+                    <input type="file" id="cv" name="cv">
+                </td>
+            </tr>
+
+            <tr bgcolor="cyan">
+                <td align="center">
+                    <h1>Proiecte anterioare</h1>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table border="2">
+                        <tr>
+                            <th>
+                                Nume Proiect
+                            </th>
+                            <th>
+                                Regizor Proiect
+                            </th>
+                            <th>
+                                Durat&#259;
+                            </th>
+                            <th>
+                                Competen&#355;e dezvoltate
+                            </th>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">
+                                <input type="text" name="nume-proiect">
+                            </td>
+                            <td rowspan="3">
+                                <input type="text" name="regizor-proiect">
+                            </td>
+                            <td rowspan="3">
+                                De la: 
+                                <input type="text" name="start-proiect"> <br>
+                                P&#226;n&#259; la:
+                                <input type="text" name="end-proiect">
+                            </td>
+                            <td>
+                                <input type="text" name="prima-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="doua-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="treia-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">
+                                <input type="text" name="nume-proiect">
+                            </td>
+                            <td rowspan="3">
+                                <input type="text" name="regizor-proiect">
+                            </td>
+                            <td rowspan="3">
+                                De la: 
+                                <input type="text" name="start-proiect"> <br>
+                                P&#226;n&#259; la:
+                                <input type="text" name="end-proiect">
+                            </td>
+                            <td>
+                                <input type="text" name="prima-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="doua-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="treia-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">
+                                <input type="text" name="nume-proiect">
+                            </td>
+                            <td rowspan="3">
+                                <input type="text" name="regizor-proiect">
+                            </td>
+                            <td rowspan="3">
+                                De la: 
+                                <input type="text" name="start-proiect"> <br>
+                                P&#226;n&#259; la:
+                                <input type="text" name="end-proiect">
+                            </td>
+                            <td>
+                                <input type="text" name="prima-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="doua-comp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="treia-comp">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center">
+                    <div>
+                        <h2>Pozi&#355;ii disponibile</h2>
+                    </div>
+                    <table border="2">
+                        <tr>
+                            <th>
+                                Filme:
+                            </th>
+                            <th>
+                                Seriale:
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ol type="1" start="10">
+                                    <li>
+                                        Dune
+                                        <ul>
+                                            <li>
+                                                <a href="/detalii-dune" target="_blank">Detalii film</a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:DenisVilleneuve@gmail.com">Contact regizor: <span>Denis
+                                                        Villeneuve</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Madame Web
+                                        <ul>
+                                            <li>
+                                                <a href="/detalii-madame-web" target="_blank">Detalii film</a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:Clarkson@gmail.com">Contact regizor: <span>S.J.
+                                                        Clarkson</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        V&#226;n&#259;torii de fantome: Imperiul &#238;nghe&#355;at
+                                        <ul>
+                                            <li>
+                                                <a href="/detalii-vanatorii-de-fantome" target="_blank">Detalii film</a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:GilKenan@gmail.com">Contact regizor: <span>Gil
+                                                        Kenan</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </td>
+                            <td>
+                                <ol type="A">
+                                    <li>
+                                        <b>Breaking Bad</b>
+                                        <ul>
+                                            <li>
+                                                <a href="/detalii-breaking-bad" target="_blank">Detalii serial</a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:VinceGilligane@gmail.com">Contact regizor: <span>Vince
+                                                        Gilligane</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <b>Stranger Things</b>
+                                        <ul>
+                                            <li>
+                                                <a href="/detalii-stranger-things" target="_blank">Detalii serial</a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:TheDufferBrothers@gmail.com">Contact regizor: <span>The
+                                                        Duffer Brothers</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center">
+                    <table>
+                        <tr>
+                            <td>
+                                <b><label for="terms">Accept termenii &#351;i condi&#355;iile &#238;n leg&#259;tur&#259; cu prelucrarea datelor</label></b>
+                                <input type="checkbox" id="terms" name="terms" checked>
+                            </td>
+                            <td>
+                                <input type="submit" value="Trimite">
+                            </td>
+                            <td>
+                                <input type="reset" value="Resetează">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+body, p, h1, ul {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: red;
+    height: 100px;
+    text-align: center;
+}
+
+.content {
+    min-height: calc(100vh - 160px);
+    background-color: green;
+}
+
+.menu {
+    background: yellow;
+    text-align: center;
+    height: 25px;
+    list-style-type: none;
+}
+
+.main-view p {
+    font-size: 20px;
+}
+
+footer {
+    background-color: pink;
+    height: 60px;
+    text-align: center;
+}

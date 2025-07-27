@@ -1,0 +1,17 @@
+ul {
+    list-style-type: none;
+    background-color: yellow;
+    width: 25%;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.portrait {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.portrait p {
+    padding-left: 10px;
+}

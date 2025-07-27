@@ -1,0 +1,108 @@
+ul {
+    list-style-type: none;
+}
+
+ul li{
+    width: 84px;
+    height: 84px;
+    /* float: left; */
+}
+
+#icon1 {
+    background-position: 0 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon1:hover {
+    background-position: 0 0;
+}
+
+#icon2 {
+    background-position: -84px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon2:hover {
+    background-position: -84px 0;
+}
+
+#icon3 {
+    background-position: -168px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon3:hover {
+    background-position: -168px 0;
+}
+
+#icon4 {
+    background-position: -252px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon4:hover {
+    background-position: -252px 0;
+}
+
+#icon5 {
+    background-position: -336px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon5:hover {
+    background-position: -336px 0;
+}
+
+#icon6 {
+    background-position: -420px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon6:hover {
+    background-position: -420px 0;
+}
+
+#icon7 {
+    background-position: -504px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon7:hover {
+    background-position: -504px 0;
+}
+
+#icon8 {
+    background-position: -588px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon8:hover {
+    background-position: -588px 0;
+}
+
+#icon9 {
+    background-position: -672px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon9:hover {
+    background-position: -672px 0;
+}
+
+#icon10 {
+    background-position: -756px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon10:hover {
+    background-position: -756px 0;
+}
+
+#icon11 {
+    background-position: -840px 84px;
+    background-image: url("css-pr4.png");
+}
+
+#icon11:hover {
+    background-position: -840px 0;
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>gt</short-name>
+    <uri>http://example.com/tags</uri>
+
+    <tag>
+        <name>graph</name>
+        <tag-class>jss.graph.graphtag.GraphTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>valuesOx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int[]</type>
+        </attribute>
+        <attribute>
+            <name>valuesOy</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int[]</type>
+        </attribute>
+        <attribute>
+            <name>labelOx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>labelOy</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>minOx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>maxOx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>minOy</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>maxOy</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>color</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>
