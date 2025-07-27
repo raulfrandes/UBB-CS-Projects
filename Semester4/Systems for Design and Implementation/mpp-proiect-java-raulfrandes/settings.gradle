@@ -1,0 +1,9 @@
+rootProject.name = 'mpp-proiect-java-raulfrandes'
+include 'TriathlonModel'
+include 'TriathlonPersistence'
+include 'TriathlonServices'
+include 'TriathlonNetworking'
+include 'TriathlonServer'
+include 'TriathlonClient'
+include 'RestServices'
+
