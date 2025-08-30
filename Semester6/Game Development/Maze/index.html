@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Maze Game</title>
+  <script src="/lib/enable3d/enable3d.framework.0.22.0-dev.1.min.js"></script>
+  <style>
+    #vignette {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+      mix-blend-mode: multiply; /* darken mode */
+      transition: background 0.25s;
+      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 180px, rgba(0,0,0,0.85) 480px);
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; overflow:hidden;">
+  <div id="vignette"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
