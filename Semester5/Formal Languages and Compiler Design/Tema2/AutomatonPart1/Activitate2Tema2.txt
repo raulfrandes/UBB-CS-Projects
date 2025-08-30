@@ -1,0 +1,28 @@
+FiniteAutomata:
+- initialState: State
+- finalState: List<State>
+- transitions: List<Transition>
+- allStates: List<Alphabet>
+- BNF: String
+
+
+State:
+- value: String
+- type: StateType: Enum
+
+
+StateType:
+- INITIAL
+- NORMAL
+- FINAL
+
+
+Transition:
+- source: State
+- alphabet: Alphabet
+- destination: State
+
+
+Alphabet:
+- value: String
+- EPSILON: String

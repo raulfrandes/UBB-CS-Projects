@@ -1,0 +1,11 @@
+automat = stari alfabet stare_initiala stare_finala tranzitii
+stari = stare [{" " stare}]
+alfabet = simbol [{" " simbol}]
+stare_initiala = stare
+stare_finala = stare [{" " stare}]
+tranzitii = tranzitie [{newline tranzitie}]
+tranzitie = "f(" stare "," simbol ")=" stare
+stare = litera
+simbol = litera | digit
+litera = "a" | "b" | ... | "z" | "A" | "B" | ... | "Z"
+digit = "0" | "1" | ... | "9"

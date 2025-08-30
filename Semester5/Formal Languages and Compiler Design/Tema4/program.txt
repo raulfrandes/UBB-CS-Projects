@@ -1,0 +1,23 @@
+struct mystruct {
+    int a;
+    float b;
+}
+
+void main() {
+    int n;
+    int i;
+    int suma;
+    int numar;
+    
+    suma = 0; 
+    cin >> n;
+    
+    for (i = 0; i < n; i = i + 1) {
+        cin >> numar; 
+        suma = suma + numar;
+    }
+    
+    suma = suma + 5.47;
+    
+    cout << suma;
+}

@@ -1,0 +1,137 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "HashTable.h"
+
+HashTable *symbol_table;
+FILE *fip_file;
+FILE *ts_file;
+int line_number = 1;
+
+#define MAX_ATOMS 64
+char *atom_names[MAX_ATOMS];
+int atom_count = 0;
+
+void load_atoms(const char *filename);
+void add_to_fip(const char *token, const char *type);
+void save_ts_to_file();
+void report_error(const char *token);
+%}
+
+%option noyywrap
+
+DIGIT               [0-9]
+NON_ZERO_DIGIT      [1-9]
+OCTAL_DIGIT         [0-7]
+HEX_DIGIT           [0-9a-fA-F]
+LETTER              [a-zA-Z]
+ID                  ({LETTER}|_)({LETTER}|{DIGIT}|_)*
+CONST_INT           0|[+-]?{NON_ZERO_DIGIT}{DIGIT}*|0{OCTAL_DIGIT}+|0[xX]{HEX_DIGIT}+
+CONST_REAL          [+-]?{DIGIT}+\.{DIGIT}*([eE][+-]?{DIGIT}+)?
+KEYWORDS            void|main|int|float|struct|cin|cout|endl|if|else|for|repeta|(pana\ cand)
+OPERATORS           (\+|\-|\*|\/|%|=|<<|>>|<|<=|>|>=|==|!=)
+DELIMITERS          (\(|\)|\{|\}|;|,)
+
+%%
+
+[ \t]+                                  
+{ID}                                    add_to_fip(yytext, "ID");
+{CONST_INT}|{CONST_REAL}                add_to_fip(yytext, "CONST");
+{KEYWORDS}|{OPERATORS}|{DELIMITERS}     add_to_fip(yytext, "OTHER");
+\n                                      line_number++;
+.                                       report_error(yytext);
+
+%%
+
+void load_atoms(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        perror("Error loading atoms file");
+        exit(1);
+    }
+
+    char line[128];
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = '\0';
+        atom_names[atom_count++] = strdup(line);
+    }
+    fclose(file);
+}
+
+void add_to_fip(const char *token, const char *type) {
+    int atom_code = -1;
+    int index = -1;
+
+    for (int i = 0; i < atom_count; i++) {
+        if (strcmp(atom_names[i], token) == 0) {
+            atom_code = i + 1;
+            break;
+        }
+    }
+
+    if (atom_code == -1) {
+        if (strcmp(type, "ID") == 0 || strcmp(type, "CONST") == 0) {
+            atom_code = strcmp(type, "ID") == 0 ? 1 : 2;
+            index = put(symbol_table, token);
+        }
+    }
+
+    if (atom_code != -1) {
+        fprintf(fip_file, "%d | %d\n", atom_code, index == -1 ? 0 : index + 1);
+    }
+}
+
+void report_error(const char *token) {
+    fprintf(stderr, "Error: Unrecognized token '%s' on line %d\n", token, line_number);
+}
+
+void save_ts_to_file() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (symbol_table->table[i] != NULL) {
+            fprintf(ts_file, "%s\n", symbol_table->table[i]->key);
+        }
+        else {
+            fprintf(ts_file, "\n");
+        }
+    }
+}
+
+int main(int argc, char **argv) {
+    if (argc != 2) {
+        printf("Usage: %s <input_file>\n", argv[0]);
+        return 1;
+    }
+
+    load_atoms("atoms.txt");
+
+    fip_file = fopen("fip.txt", "w");
+    ts_file = fopen("ts.txt", "w");
+    if (!fip_file || !ts_file) {
+        perror("Could not open output files");
+        return 1;
+    }
+
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        perror("Could not open input file");
+        return 1;
+    }
+
+    symbol_table = create_table();
+    yyin = file;
+
+    yylex();
+
+    save_ts_to_file();
+
+    fclose(fip_file);
+    fclose(ts_file);
+    fclose(file);
+    free_table(symbol_table);
+    for (int i = 0; i < atom_count; i++) {
+        free(atom_names[i]);
+    }
+
+    return 0;
+}

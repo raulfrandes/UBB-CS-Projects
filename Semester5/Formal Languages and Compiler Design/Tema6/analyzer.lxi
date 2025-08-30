@@ -1,0 +1,53 @@
+%{
+#include <string.h>
+
+#include "attrib.h"
+#include "analyzer.tab.h"
+
+int line_number = 1;
+%}
+
+%option noyywrap
+
+DIGIT               [0-9]
+NON_ZERO_DIGIT      [1-9]
+LETTER              [a-zA-Z]
+ID                  ({LETTER}|_)({LETTER}|{DIGIT}|_)*
+CONST               0|[+-]?{NON_ZERO_DIGIT}{DIGIT}*
+
+%%
+
+[ \t]+
+void                        { return VOID; }
+main                        { return MAIN; }
+int                         { return INT; }
+cin                         { return CIN; }
+cout                        { return COUT; }
+endl                        { return ENDL; }
+{ID}                        { 
+                              strcpy(yylval.varname, yytext);
+                              return ID;
+                            }
+{CONST}                     {
+                              strcpy(yylval.varname, yytext); 
+                              return CONST; 
+                            }
+\+                          { return PLUS; }
+\-                          { return MINUS; }
+\*                          { return MUL; }
+=                           { return ASSIGN; }
+\<<                         { return OUT_OP; }
+>>                          { return IN_OP; }
+\(                          { return LPAREN; }
+\)                          { return RPAREN; }
+\{                          { return LBRACE; }
+\}                          { return RBRACE; }
+;                           { return SEMICOLON; }
+,                           { return COMMA; }
+\n                          { line_number++; }
+.                           { 
+                              fprintf(stderr, "Lexical Error: Unrecognized character %s on line #%d\n", yytext, line_number); 
+                              return EXIT_FAILURE; 
+                              }
+
+%%

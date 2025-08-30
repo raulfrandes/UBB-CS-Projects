@@ -1,0 +1,7 @@
+p q r
+a
+p
+r
+f(p,a)=q
+f(q,a)=r
+f(r,a)=q

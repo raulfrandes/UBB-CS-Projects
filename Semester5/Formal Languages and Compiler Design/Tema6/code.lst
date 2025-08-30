@@ -1,0 +1,51 @@
+     1                                  bits 32 
+     2                                  global start 
+     3                                  extern exit, printf, scanf 
+     4                                  import exit msvcrt.dll 
+     5                                  import printf msvcrt.dll 
+     6                                  import scanf msvcrt.dll 
+     7                                  segment data use32 class=data 
+     8 00000000 <res 00000004>          result resw 2 
+     9 00000004 <res 00000004>          b resw 2 
+    10 00000008 <res 00000004>          a resw 2 
+    11 0000000C <res 00000004>          temp1 resw 2 
+    12 00000010 <res 00000004>          temp2 resw 2 
+    13 00000014 <res 00000004>          temp3 resw 2 
+    14 00000018 <res 00000004>          temp4 resw 2 
+    15 0000001C 256400                  format db '%d', 0 
+    16 0000001F 0A00                    newline db 10, 0 
+    17                                  segment code use32 class=code 
+    18                                  start: 
+    19 00000000 68[08000000]            push dword a 
+    20 00000005 68[1C000000]            push dword format 
+    21 0000000A FF15[00000000]          call [scanf] 
+    22 00000010 83C408                  add esp, 4*2 
+    23 00000013 68[04000000]            push dword b 
+    24 00000018 68[1C000000]            push dword format 
+    25 0000001D FF15[00000000]          call [scanf] 
+    26 00000023 83C408                  add esp, 4*2 
+    27 00000026 B802000000              mov eax, 2 
+    28 0000002B 8B1D[08000000]          mov ebx, [a] 
+    29 00000031 F7E3                    mul ebx 
+    30 00000033 A3[0C000000]            mov [temp1], eax 
+    31 00000038 B805000000              mov eax, 5 
+    32 0000003D 0305[0C000000]          add eax, [temp1] 
+    33 00000043 A3[10000000]            mov [temp2], eax 
+    34 00000048 A1[04000000]            mov eax, [b] 
+    35 0000004D BB03000000              mov ebx, 3 
+    36 00000052 F7E3                    mul ebx 
+    37 00000054 A3[14000000]            mov [temp3], eax 
+    38 00000059 A1[10000000]            mov eax, [temp2] 
+    39 0000005E 2B05[14000000]          sub eax, [temp3] 
+    40 00000064 A3[18000000]            mov [temp4], eax 
+    41 00000069 A1[18000000]            mov eax, [temp4] 
+    42 0000006E A3[00000000]            mov [result], eax 
+    43 00000073 FF35[00000000]          push dword [result] 
+    44 00000079 68[1C000000]            push dword format 
+    45 0000007E FF15[00000000]          call [printf] 
+    46 00000084 83C408                  add esp, 4*2 
+    47 00000087 68[1F000000]            push dword newline 
+    48 0000008C FF15[00000000]          call [printf] 
+    49 00000092 83C404                  add esp, 4*1 
+    50 00000095 6A00                    push dword 0 
+    51 00000097 FF15[00000000]          call [exit] 

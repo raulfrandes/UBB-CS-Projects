@@ -1,0 +1,1174 @@
+Terminals unused in grammar
+
+   COMMA
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: struct_declarations VOID MAIN LPAREN RPAREN LBRACE var_declarations instructions RBRACE
+
+    2 struct_declarations: STRUCT ID LBRACE var_declarations RBRACE
+    3                    | /* empty */
+
+    4 var_declarations: var_declaration var_declarations
+    5                 | /* empty */
+
+    6 var_declaration: data_type ID SEMICOLON
+    7                | data_type assignment_instr SEMICOLON
+
+    8 data_type: INT
+    9          | FLOAT
+   10          | STRUCT
+
+   11 instructions: instruction instructions
+   12             | /* empty */
+
+   13 instruction: in_instr
+   14            | out_instr
+   15            | assignment_instr
+   16            | control_instr
+   17            | loop_instr
+   18            | SEMICOLON
+
+   19 in_instr: CIN input_chain SEMICOLON
+
+   20 input_chain: IN_OP ID input_chain
+   21            | /* empty */
+
+   22 out_instr: COUT output_chain SEMICOLON
+
+   23 output_chain: OUT_OP expression output_chain
+   24             | OUT_OP ENDL output_chain
+   25             | /* empty */
+
+   26 assignment_instr: ID ASSIGN expression SEMICOLON
+
+   27 control_instr: IF LPAREN condition RPAREN LBRACE instructions RBRACE
+   28              | IF LPAREN condition RPAREN LBRACE instructions RBRACE ELSE LBRACE instructions RBRACE
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE
+
+   30 condition: expression LT expression
+   31          | expression LE expression
+   32          | expression GT expression
+   33          | expression GE expression
+   34          | expression EQ expression
+   35          | expression NE expression
+
+   36 expression: ID
+   37           | CONST
+   38           | expression PLUS expression
+   39           | expression MINUS expression
+   40           | expression MUL expression
+   41           | expression DIV expression
+   42           | expression MOD expression
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ID (258) 2 6 20 26 36
+CONST (259) 37
+VOID (260) 1
+MAIN (261) 1
+INT (262) 8
+FLOAT (263) 9
+STRUCT (264) 2 10
+CIN (265) 19
+COUT (266) 22
+ENDL (267) 24
+IF (268) 27 28
+ELSE (269) 28
+FOR (270) 29
+PLUS (271) 38
+MINUS (272) 39
+MUL (273) 40
+DIV (274) 41
+MOD (275) 42
+ASSIGN (276) 26
+IN_OP (277) 20
+OUT_OP (278) 23 24
+LT (279) 30
+LE (280) 31
+GT (281) 32
+GE (282) 33
+EQ (283) 34
+NE (284) 35
+LPAREN (285) 1 27 28 29
+RPAREN (286) 1 27 28 29
+LBRACE (287) 1 2 27 28 29
+RBRACE (288) 1 2 27 28 29
+SEMICOLON (289) 6 7 18 19 22 26 29
+COMMA (290)
+
+
+Nonterminals, with rules where they appear
+
+$accept (36)
+    on left: 0
+program (37)
+    on left: 1, on right: 0
+struct_declarations (38)
+    on left: 2 3, on right: 1
+var_declarations (39)
+    on left: 4 5, on right: 1 2 4
+var_declaration (40)
+    on left: 6 7, on right: 4
+data_type (41)
+    on left: 8 9 10, on right: 6 7
+instructions (42)
+    on left: 11 12, on right: 1 11 27 28 29
+instruction (43)
+    on left: 13 14 15 16 17 18, on right: 11
+in_instr (44)
+    on left: 19, on right: 13
+input_chain (45)
+    on left: 20 21, on right: 19 20
+out_instr (46)
+    on left: 22, on right: 14
+output_chain (47)
+    on left: 23 24 25, on right: 22 23 24
+assignment_instr (48)
+    on left: 26, on right: 7 15 29
+control_instr (49)
+    on left: 27 28, on right: 16
+loop_instr (50)
+    on left: 29, on right: 17
+condition (51)
+    on left: 30 31 32 33 34 35, on right: 27 28 29
+expression (52)
+    on left: 36 37 38 39 40 41 42, on right: 23 26 30 31 32 33 34 35
+    38 39 40 41 42
+
+
+state 0
+
+    0 $accept: . program $end
+
+    STRUCT  shift, and go to state 1
+
+    $default  reduce using rule 3 (struct_declarations)
+
+    program              go to state 2
+    struct_declarations  go to state 3
+
+
+state 1
+
+    2 struct_declarations: STRUCT . ID LBRACE var_declarations RBRACE
+
+    ID  shift, and go to state 4
+
+
+state 2
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 5
+
+
+state 3
+
+    1 program: struct_declarations . VOID MAIN LPAREN RPAREN LBRACE var_declarations instructions RBRACE
+
+    VOID  shift, and go to state 6
+
+
+state 4
+
+    2 struct_declarations: STRUCT ID . LBRACE var_declarations RBRACE
+
+    LBRACE  shift, and go to state 7
+
+
+state 5
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 6
+
+    1 program: struct_declarations VOID . MAIN LPAREN RPAREN LBRACE var_declarations instructions RBRACE
+
+    MAIN  shift, and go to state 8
+
+
+state 7
+
+    2 struct_declarations: STRUCT ID LBRACE . var_declarations RBRACE
+
+    INT     shift, and go to state 9
+    FLOAT   shift, and go to state 10
+    STRUCT  shift, and go to state 11
+
+    $default  reduce using rule 5 (var_declarations)
+
+    var_declarations  go to state 12
+    var_declaration   go to state 13
+    data_type         go to state 14
+
+
+state 8
+
+    1 program: struct_declarations VOID MAIN . LPAREN RPAREN LBRACE var_declarations instructions RBRACE
+
+    LPAREN  shift, and go to state 15
+
+
+state 9
+
+    8 data_type: INT .
+
+    $default  reduce using rule 8 (data_type)
+
+
+state 10
+
+    9 data_type: FLOAT .
+
+    $default  reduce using rule 9 (data_type)
+
+
+state 11
+
+   10 data_type: STRUCT .
+
+    $default  reduce using rule 10 (data_type)
+
+
+state 12
+
+    2 struct_declarations: STRUCT ID LBRACE var_declarations . RBRACE
+
+    RBRACE  shift, and go to state 16
+
+
+state 13
+
+    4 var_declarations: var_declaration . var_declarations
+
+    INT     shift, and go to state 9
+    FLOAT   shift, and go to state 10
+    STRUCT  shift, and go to state 11
+
+    $default  reduce using rule 5 (var_declarations)
+
+    var_declarations  go to state 17
+    var_declaration   go to state 13
+    data_type         go to state 14
+
+
+state 14
+
+    6 var_declaration: data_type . ID SEMICOLON
+    7                | data_type . assignment_instr SEMICOLON
+
+    ID  shift, and go to state 18
+
+    assignment_instr  go to state 19
+
+
+state 15
+
+    1 program: struct_declarations VOID MAIN LPAREN . RPAREN LBRACE var_declarations instructions RBRACE
+
+    RPAREN  shift, and go to state 20
+
+
+state 16
+
+    2 struct_declarations: STRUCT ID LBRACE var_declarations RBRACE .
+
+    $default  reduce using rule 2 (struct_declarations)
+
+
+state 17
+
+    4 var_declarations: var_declaration var_declarations .
+
+    $default  reduce using rule 4 (var_declarations)
+
+
+state 18
+
+    6 var_declaration: data_type ID . SEMICOLON
+   26 assignment_instr: ID . ASSIGN expression SEMICOLON
+
+    ASSIGN     shift, and go to state 21
+    SEMICOLON  shift, and go to state 22
+
+
+state 19
+
+    7 var_declaration: data_type assignment_instr . SEMICOLON
+
+    SEMICOLON  shift, and go to state 23
+
+
+state 20
+
+    1 program: struct_declarations VOID MAIN LPAREN RPAREN . LBRACE var_declarations instructions RBRACE
+
+    LBRACE  shift, and go to state 24
+
+
+state 21
+
+   26 assignment_instr: ID ASSIGN . expression SEMICOLON
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 27
+
+
+state 22
+
+    6 var_declaration: data_type ID SEMICOLON .
+
+    $default  reduce using rule 6 (var_declaration)
+
+
+state 23
+
+    7 var_declaration: data_type assignment_instr SEMICOLON .
+
+    $default  reduce using rule 7 (var_declaration)
+
+
+state 24
+
+    1 program: struct_declarations VOID MAIN LPAREN RPAREN LBRACE . var_declarations instructions RBRACE
+
+    INT     shift, and go to state 9
+    FLOAT   shift, and go to state 10
+    STRUCT  shift, and go to state 11
+
+    $default  reduce using rule 5 (var_declarations)
+
+    var_declarations  go to state 28
+    var_declaration   go to state 13
+    data_type         go to state 14
+
+
+state 25
+
+   36 expression: ID .
+
+    $default  reduce using rule 36 (expression)
+
+
+state 26
+
+   37 expression: CONST .
+
+    $default  reduce using rule 37 (expression)
+
+
+state 27
+
+   26 assignment_instr: ID ASSIGN expression . SEMICOLON
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS       shift, and go to state 29
+    MINUS      shift, and go to state 30
+    MUL        shift, and go to state 31
+    DIV        shift, and go to state 32
+    MOD        shift, and go to state 33
+    SEMICOLON  shift, and go to state 34
+
+
+state 28
+
+    1 program: struct_declarations VOID MAIN LPAREN RPAREN LBRACE var_declarations . instructions RBRACE
+
+    ID         shift, and go to state 35
+    CIN        shift, and go to state 36
+    COUT       shift, and go to state 37
+    IF         shift, and go to state 38
+    FOR        shift, and go to state 39
+    SEMICOLON  shift, and go to state 40
+
+    $default  reduce using rule 12 (instructions)
+
+    instructions      go to state 41
+    instruction       go to state 42
+    in_instr          go to state 43
+    out_instr         go to state 44
+    assignment_instr  go to state 45
+    control_instr     go to state 46
+    loop_instr        go to state 47
+
+
+state 29
+
+   38 expression: expression PLUS . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 48
+
+
+state 30
+
+   39 expression: expression MINUS . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 49
+
+
+state 31
+
+   40 expression: expression MUL . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 50
+
+
+state 32
+
+   41 expression: expression DIV . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 51
+
+
+state 33
+
+   42 expression: expression MOD . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 52
+
+
+state 34
+
+   26 assignment_instr: ID ASSIGN expression SEMICOLON .
+
+    $default  reduce using rule 26 (assignment_instr)
+
+
+state 35
+
+   26 assignment_instr: ID . ASSIGN expression SEMICOLON
+
+    ASSIGN  shift, and go to state 21
+
+
+state 36
+
+   19 in_instr: CIN . input_chain SEMICOLON
+
+    IN_OP  shift, and go to state 53
+
+    $default  reduce using rule 21 (input_chain)
+
+    input_chain  go to state 54
+
+
+state 37
+
+   22 out_instr: COUT . output_chain SEMICOLON
+
+    OUT_OP  shift, and go to state 55
+
+    $default  reduce using rule 25 (output_chain)
+
+    output_chain  go to state 56
+
+
+state 38
+
+   27 control_instr: IF . LPAREN condition RPAREN LBRACE instructions RBRACE
+   28              | IF . LPAREN condition RPAREN LBRACE instructions RBRACE ELSE LBRACE instructions RBRACE
+
+    LPAREN  shift, and go to state 57
+
+
+state 39
+
+   29 loop_instr: FOR . LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE
+
+    LPAREN  shift, and go to state 58
+
+
+state 40
+
+   18 instruction: SEMICOLON .
+
+    $default  reduce using rule 18 (instruction)
+
+
+state 41
+
+    1 program: struct_declarations VOID MAIN LPAREN RPAREN LBRACE var_declarations instructions . RBRACE
+
+    RBRACE  shift, and go to state 59
+
+
+state 42
+
+   11 instructions: instruction . instructions
+
+    ID         shift, and go to state 35
+    CIN        shift, and go to state 36
+    COUT       shift, and go to state 37
+    IF         shift, and go to state 38
+    FOR        shift, and go to state 39
+    SEMICOLON  shift, and go to state 40
+
+    $default  reduce using rule 12 (instructions)
+
+    instructions      go to state 60
+    instruction       go to state 42
+    in_instr          go to state 43
+    out_instr         go to state 44
+    assignment_instr  go to state 45
+    control_instr     go to state 46
+    loop_instr        go to state 47
+
+
+state 43
+
+   13 instruction: in_instr .
+
+    $default  reduce using rule 13 (instruction)
+
+
+state 44
+
+   14 instruction: out_instr .
+
+    $default  reduce using rule 14 (instruction)
+
+
+state 45
+
+   15 instruction: assignment_instr .
+
+    $default  reduce using rule 15 (instruction)
+
+
+state 46
+
+   16 instruction: control_instr .
+
+    $default  reduce using rule 16 (instruction)
+
+
+state 47
+
+   17 instruction: loop_instr .
+
+    $default  reduce using rule 17 (instruction)
+
+
+state 48
+
+   38 expression: expression . PLUS expression
+   38           | expression PLUS expression .
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    MUL  shift, and go to state 31
+    DIV  shift, and go to state 32
+    MOD  shift, and go to state 33
+
+    $default  reduce using rule 38 (expression)
+
+
+state 49
+
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   39           | expression MINUS expression .
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    MUL  shift, and go to state 31
+    DIV  shift, and go to state 32
+    MOD  shift, and go to state 33
+
+    $default  reduce using rule 39 (expression)
+
+
+state 50
+
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   40           | expression MUL expression .
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    $default  reduce using rule 40 (expression)
+
+
+state 51
+
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   41           | expression DIV expression .
+   42           | expression . MOD expression
+
+    $default  reduce using rule 41 (expression)
+
+
+state 52
+
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+   42           | expression MOD expression .
+
+    $default  reduce using rule 42 (expression)
+
+
+state 53
+
+   20 input_chain: IN_OP . ID input_chain
+
+    ID  shift, and go to state 61
+
+
+state 54
+
+   19 in_instr: CIN input_chain . SEMICOLON
+
+    SEMICOLON  shift, and go to state 62
+
+
+state 55
+
+   23 output_chain: OUT_OP . expression output_chain
+   24             | OUT_OP . ENDL output_chain
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+    ENDL   shift, and go to state 63
+
+    expression  go to state 64
+
+
+state 56
+
+   22 out_instr: COUT output_chain . SEMICOLON
+
+    SEMICOLON  shift, and go to state 65
+
+
+state 57
+
+   27 control_instr: IF LPAREN . condition RPAREN LBRACE instructions RBRACE
+   28              | IF LPAREN . condition RPAREN LBRACE instructions RBRACE ELSE LBRACE instructions RBRACE
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    condition   go to state 66
+    expression  go to state 67
+
+
+state 58
+
+   29 loop_instr: FOR LPAREN . assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE
+
+    ID  shift, and go to state 35
+
+    assignment_instr  go to state 68
+
+
+state 59
+
+    1 program: struct_declarations VOID MAIN LPAREN RPAREN LBRACE var_declarations instructions RBRACE .
+
+    $default  reduce using rule 1 (program)
+
+
+state 60
+
+   11 instructions: instruction instructions .
+
+    $default  reduce using rule 11 (instructions)
+
+
+state 61
+
+   20 input_chain: IN_OP ID . input_chain
+
+    IN_OP  shift, and go to state 53
+
+    $default  reduce using rule 21 (input_chain)
+
+    input_chain  go to state 69
+
+
+state 62
+
+   19 in_instr: CIN input_chain SEMICOLON .
+
+    $default  reduce using rule 19 (in_instr)
+
+
+state 63
+
+   24 output_chain: OUT_OP ENDL . output_chain
+
+    OUT_OP  shift, and go to state 55
+
+    $default  reduce using rule 25 (output_chain)
+
+    output_chain  go to state 70
+
+
+state 64
+
+   23 output_chain: OUT_OP expression . output_chain
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS    shift, and go to state 29
+    MINUS   shift, and go to state 30
+    MUL     shift, and go to state 31
+    DIV     shift, and go to state 32
+    MOD     shift, and go to state 33
+    OUT_OP  shift, and go to state 55
+
+    $default  reduce using rule 25 (output_chain)
+
+    output_chain  go to state 71
+
+
+state 65
+
+   22 out_instr: COUT output_chain SEMICOLON .
+
+    $default  reduce using rule 22 (out_instr)
+
+
+state 66
+
+   27 control_instr: IF LPAREN condition . RPAREN LBRACE instructions RBRACE
+   28              | IF LPAREN condition . RPAREN LBRACE instructions RBRACE ELSE LBRACE instructions RBRACE
+
+    RPAREN  shift, and go to state 72
+
+
+state 67
+
+   30 condition: expression . LT expression
+   31          | expression . LE expression
+   32          | expression . GT expression
+   33          | expression . GE expression
+   34          | expression . EQ expression
+   35          | expression . NE expression
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+    LT     shift, and go to state 73
+    LE     shift, and go to state 74
+    GT     shift, and go to state 75
+    GE     shift, and go to state 76
+    EQ     shift, and go to state 77
+    NE     shift, and go to state 78
+
+
+state 68
+
+   29 loop_instr: FOR LPAREN assignment_instr . SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE
+
+    SEMICOLON  shift, and go to state 79
+
+
+state 69
+
+   20 input_chain: IN_OP ID input_chain .
+
+    $default  reduce using rule 20 (input_chain)
+
+
+state 70
+
+   24 output_chain: OUT_OP ENDL output_chain .
+
+    $default  reduce using rule 24 (output_chain)
+
+
+state 71
+
+   23 output_chain: OUT_OP expression output_chain .
+
+    $default  reduce using rule 23 (output_chain)
+
+
+state 72
+
+   27 control_instr: IF LPAREN condition RPAREN . LBRACE instructions RBRACE
+   28              | IF LPAREN condition RPAREN . LBRACE instructions RBRACE ELSE LBRACE instructions RBRACE
+
+    LBRACE  shift, and go to state 80
+
+
+state 73
+
+   30 condition: expression LT . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 81
+
+
+state 74
+
+   31 condition: expression LE . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 82
+
+
+state 75
+
+   32 condition: expression GT . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 83
+
+
+state 76
+
+   33 condition: expression GE . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 84
+
+
+state 77
+
+   34 condition: expression EQ . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 85
+
+
+state 78
+
+   35 condition: expression NE . expression
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    expression  go to state 86
+
+
+state 79
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON . condition SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE
+
+    ID     shift, and go to state 25
+    CONST  shift, and go to state 26
+
+    condition   go to state 87
+    expression  go to state 67
+
+
+state 80
+
+   27 control_instr: IF LPAREN condition RPAREN LBRACE . instructions RBRACE
+   28              | IF LPAREN condition RPAREN LBRACE . instructions RBRACE ELSE LBRACE instructions RBRACE
+
+    ID         shift, and go to state 35
+    CIN        shift, and go to state 36
+    COUT       shift, and go to state 37
+    IF         shift, and go to state 38
+    FOR        shift, and go to state 39
+    SEMICOLON  shift, and go to state 40
+
+    $default  reduce using rule 12 (instructions)
+
+    instructions      go to state 88
+    instruction       go to state 42
+    in_instr          go to state 43
+    out_instr         go to state 44
+    assignment_instr  go to state 45
+    control_instr     go to state 46
+    loop_instr        go to state 47
+
+
+state 81
+
+   30 condition: expression LT expression .
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+
+    $default  reduce using rule 30 (condition)
+
+
+state 82
+
+   31 condition: expression LE expression .
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+
+    $default  reduce using rule 31 (condition)
+
+
+state 83
+
+   32 condition: expression GT expression .
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+
+    $default  reduce using rule 32 (condition)
+
+
+state 84
+
+   33 condition: expression GE expression .
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+
+    $default  reduce using rule 33 (condition)
+
+
+state 85
+
+   34 condition: expression EQ expression .
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+
+    $default  reduce using rule 34 (condition)
+
+
+state 86
+
+   35 condition: expression NE expression .
+   38 expression: expression . PLUS expression
+   39           | expression . MINUS expression
+   40           | expression . MUL expression
+   41           | expression . DIV expression
+   42           | expression . MOD expression
+
+    PLUS   shift, and go to state 29
+    MINUS  shift, and go to state 30
+    MUL    shift, and go to state 31
+    DIV    shift, and go to state 32
+    MOD    shift, and go to state 33
+
+    $default  reduce using rule 35 (condition)
+
+
+state 87
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition . SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE
+
+    SEMICOLON  shift, and go to state 89
+
+
+state 88
+
+   27 control_instr: IF LPAREN condition RPAREN LBRACE instructions . RBRACE
+   28              | IF LPAREN condition RPAREN LBRACE instructions . RBRACE ELSE LBRACE instructions RBRACE
+
+    RBRACE  shift, and go to state 90
+
+
+state 89
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON . assignment_instr RPAREN LBRACE instructions RBRACE
+
+    ID  shift, and go to state 35
+
+    assignment_instr  go to state 91
+
+
+state 90
+
+   27 control_instr: IF LPAREN condition RPAREN LBRACE instructions RBRACE .
+   28              | IF LPAREN condition RPAREN LBRACE instructions RBRACE . ELSE LBRACE instructions RBRACE
+
+    ELSE  shift, and go to state 92
+
+    $default  reduce using rule 27 (control_instr)
+
+
+state 91
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr . RPAREN LBRACE instructions RBRACE
+
+    RPAREN  shift, and go to state 93
+
+
+state 92
+
+   28 control_instr: IF LPAREN condition RPAREN LBRACE instructions RBRACE ELSE . LBRACE instructions RBRACE
+
+    LBRACE  shift, and go to state 94
+
+
+state 93
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN . LBRACE instructions RBRACE
+
+    LBRACE  shift, and go to state 95
+
+
+state 94
+
+   28 control_instr: IF LPAREN condition RPAREN LBRACE instructions RBRACE ELSE LBRACE . instructions RBRACE
+
+    ID         shift, and go to state 35
+    CIN        shift, and go to state 36
+    COUT       shift, and go to state 37
+    IF         shift, and go to state 38
+    FOR        shift, and go to state 39
+    SEMICOLON  shift, and go to state 40
+
+    $default  reduce using rule 12 (instructions)
+
+    instructions      go to state 96
+    instruction       go to state 42
+    in_instr          go to state 43
+    out_instr         go to state 44
+    assignment_instr  go to state 45
+    control_instr     go to state 46
+    loop_instr        go to state 47
+
+
+state 95
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE . instructions RBRACE
+
+    ID         shift, and go to state 35
+    CIN        shift, and go to state 36
+    COUT       shift, and go to state 37
+    IF         shift, and go to state 38
+    FOR        shift, and go to state 39
+    SEMICOLON  shift, and go to state 40
+
+    $default  reduce using rule 12 (instructions)
+
+    instructions      go to state 97
+    instruction       go to state 42
+    in_instr          go to state 43
+    out_instr         go to state 44
+    assignment_instr  go to state 45
+    control_instr     go to state 46
+    loop_instr        go to state 47
+
+
+state 96
+
+   28 control_instr: IF LPAREN condition RPAREN LBRACE instructions RBRACE ELSE LBRACE instructions . RBRACE
+
+    RBRACE  shift, and go to state 98
+
+
+state 97
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE instructions . RBRACE
+
+    RBRACE  shift, and go to state 99
+
+
+state 98
+
+   28 control_instr: IF LPAREN condition RPAREN LBRACE instructions RBRACE ELSE LBRACE instructions RBRACE .
+
+    $default  reduce using rule 28 (control_instr)
+
+
+state 99
+
+   29 loop_instr: FOR LPAREN assignment_instr SEMICOLON condition SEMICOLON assignment_instr RPAREN LBRACE instructions RBRACE .
+
+    $default  reduce using rule 29 (loop_instr)

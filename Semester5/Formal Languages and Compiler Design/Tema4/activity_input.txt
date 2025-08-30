@@ -1,0 +1,4 @@
+S -> epsilon
+S -> aSb
+B -> c
+B -> ;+2

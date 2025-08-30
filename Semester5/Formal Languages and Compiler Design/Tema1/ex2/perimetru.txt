@@ -1,0 +1,12 @@
+void main() {
+    int r;
+    float perimetru;
+    float arie;
+
+    cin >> r;                          
+    perimetru = 2 * 3.14 * r;           
+    arie = 3.14 * r * r;  
+
+    cout << perimetru << endl;                  
+    cout << arie;
+}

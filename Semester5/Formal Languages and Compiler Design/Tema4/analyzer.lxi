@@ -1,0 +1,57 @@
+%{
+#include "analyzer.tab.h"
+
+int line_number = 1;
+%}
+
+%option noyywrap
+
+DIGIT               [0-9]
+NON_ZERO_DIGIT      [1-9]
+OCTAL_DIGIT         [0-7]
+HEX_DIGIT           [0-9a-fA-F]
+LETTER              [a-zA-Z]
+ID                  ({LETTER}|_)({LETTER}|{DIGIT}|_)*
+CONST_INT           0|[+-]?{NON_ZERO_DIGIT}{DIGIT}*|0{OCTAL_DIGIT}+|0[xX]{HEX_DIGIT}+
+CONST_REAL          [+-]?{DIGIT}+\.{DIGIT}*([eE][+-]?{DIGIT}+)?
+
+%%
+
+[ \t]+
+void                        { return VOID; }
+main                        { return MAIN; }
+int                         { return INT; }
+float                       { return FLOAT; }
+struct                      { return STRUCT; }
+cin                         { return CIN; }
+cout                        { return COUT; }
+endl                        { return ENDL; }
+if                          { return IF; }
+else                        { return ELSE; }
+for                         { return FOR; }
+{ID}                        { return ID; }
+{CONST_INT}|{CONST_REAL}    { return CONST; }
+\+                          { return PLUS; }
+\-                          { return MINUS; }
+\*                          { return MUL; }
+\/                          { return DIV; }
+%                           { return MOD; }
+=                           { return ASSIGN; }
+\<<                         { return OUT_OP; }
+>>                          { return IN_OP; }
+\<                          { return LT; }
+\<=                         { return LE; }
+>                           { return GT; }
+>=                          { return GE; }
+==                          { return EQ; }
+!=                          { return NE; }
+\(                          { return LPAREN; }
+\)                          { return RPAREN; }
+\{                          { return LBRACE; }
+\}                          { return RBRACE; }
+;                           { return SEMICOLON; }
+,                           { return COMMA; }
+\n                          { line_number++; }
+.                           { fprintf(stderr, "Lexical Error: Unrecognized character: %s\n", yytext); return EXIT_FAILURE; }
+
+%%

@@ -1,0 +1,8 @@
+void main() {
+    int a;
+    int b;
+    int result;
+    cin >> a >> b;
+    result = 5 + 2 * a - b * 3;
+    cout << result << endl;
+}
